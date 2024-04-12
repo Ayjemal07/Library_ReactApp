@@ -17,7 +17,7 @@ const columns: GridColDef[] = [
 
 function DataTable() {
     let [ open, setOpen ] = useState(false);
-    const { BookData, getData } = useGetData();
+    const { BookData, getData,setData } = useGetData();
     const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
     const handleOpen = () => {
@@ -42,6 +42,7 @@ function DataTable() {
             id={selectionModel}
             open={open}
             onClose={handleClose}
+            setData={setData}
         />
         <div className="flex flex-row">
             <div>

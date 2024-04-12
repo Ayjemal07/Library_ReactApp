@@ -11,13 +11,14 @@ import { chooseIsbn, chooseAuthor, chooseTitle, chooseGenre } from "../redux/sli
 interface BookAddProps {
   id?: string[];
   onClose: () => void;
+  setData: any;
 }
 
 const BookForm= ( props:BookAddProps) => {
   const { register, handleSubmit } = useForm({})
   const dispatch = useDispatch();
   const store = useStore();
-  const {setData}=useGetData();
+  // const {setData}=useGetData();
 
   const onSubmit = (data: any, event: any) => {
     console.log(`ID: ${typeof props.id}`);
@@ -36,7 +37,10 @@ const BookForm= ( props:BookAddProps) => {
 
       server_calls.create(store.getState())
       // setTimeout(() => {window.location.reload()}, 1000);
-      setData(prev=>[...prev,data])
+      data.id="new"
+      
+      props.setData((prev:any)=>[...prev,data])
+
       event.target.reset()
 
       props.onClose();
